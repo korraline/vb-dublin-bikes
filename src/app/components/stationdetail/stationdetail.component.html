@@ -1,0 +1,31 @@
+<div *ngIf="station" class="container-fluid p-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-info">{{ station.number }} {{ station.name }}</h1>
+        <a type="button" class="btn btn-dark" routerLink="/stations">Back</a>
+    </div>
+    <div class="d-flex justify-content-between">
+        <h3 class="text-warning">{{ station.address}} <span class="badge badge-info">{{ station.status }}</span></h3>
+    </div>
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Lat</th>
+            <th scope="col">Lng</th>
+            <th scope="col">Total bike stands</th>
+            <th scope="col">Available bike stands</th>
+            <th scope="col">Available bikes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{{ station.number }}</th>
+            <td>{{ station.lat }}</td>
+            <td>{{ station.lng }}</td>
+            <td>{{ station.bike_stands }}</td>
+            <td>{{ station.available_bike_stands }}</td>
+            <td>{{ station.available_bikes }}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>

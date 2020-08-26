@@ -1,0 +1,30 @@
+<div class="container-fluid p-5">
+    <h1>Dublin bike stations</h1>
+    <h3>Total number of stations <span class="badge badge-info">{{ stations.length }}</span></h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Status</th>
+            <th scope="col">Bikes</th>
+            <th scope="col">Updated</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let station of stations">
+            <th>{{ station.number}}</th>
+            <td>{{ station.name }}</td>
+            <td>{{ station.address }}</td>
+            <td>{{ station.status }}</td>
+            <td>{{ station.available_bikes }}</td>
+            <td>{{ formatDate(station.last_update) }}</td>
+            <td>
+                <a class="btn btn-info" routerLink="/stationdetail/{{station.number}}">View</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

@@ -1,0 +1,15 @@
+export interface Bikes {
+    number: number,
+    contract_name: string,
+    name: string,
+    address: string,
+    status: string,
+    banking: boolean,
+    bonus: boolean,
+    bike_stands: number,
+    available_bike_stands: number,
+    available_bikes: number,
+    last_update: number,
+    lat: number,
+    lng: number,
+}
