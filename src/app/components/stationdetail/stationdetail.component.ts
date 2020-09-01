@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StationsService } from 'src/app/services/stations.service';
-import { Bikes } from 'src/app/models/bikes';
+import { Station } from 'src/app/models/bikes';
 import { getLocaleCurrencyCode } from '@angular/common';
 
 @Component({
@@ -11,7 +11,7 @@ import { getLocaleCurrencyCode } from '@angular/common';
 })
 export class StationdetailComponent implements OnInit {
   stationId = 0;
-  station: Bikes;
+  station: Station;
   constructor(private route: ActivatedRoute, private stationsService: StationsService) { }
 
   ngOnInit(): void {

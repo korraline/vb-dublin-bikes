@@ -1,4 +1,4 @@
-export interface Bikes {
+export interface Station {
     number: number,
     contract_name: string,
     name: string,

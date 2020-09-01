@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Bikes } from 'src/app/models/bikes';
+import { Station } from 'src/app/models/bikes';
 import { StationsService } from 'src/app/services/stations.service';
 import { formatDate } from '@angular/common';
 @Component({
@@ -9,7 +9,11 @@ import { formatDate } from '@angular/common';
 })
 export class StationsComponent implements OnInit {
 
-  stations: Bikes[] = [];
+  stations: Station[] = [];
+  availableBikes: number = 0;
+  nameFilter: string = '';
+  onlyAvailable: boolean = false;
+
   constructor(private stationsService: StationsService) { }
 
   ngOnInit(): void {
@@ -26,8 +30,7 @@ export class StationsComponent implements OnInit {
         const importedStation: any = station;
         keys.forEach(key => {
           stationItem[key] = station[key];
-          stationItem.lat = importedStation.position.lat;
-          stationItem.lng = importedStation.position.lng;
+          this.availableBikes += station.available_bikes;
         });
         gottenStations.push(stationItem);
       })
@@ -35,8 +38,33 @@ export class StationsComponent implements OnInit {
     });
   }
 
+  refresh() {
+    this.nameFilter = '';
+    this.onlyAvailable = false;
+    this.getStations();
+  }
+
+  filterStations() {
+    if (this.nameFilter !== '') {
+      return this.stations.filter(station => station.name.includes(this.nameFilter));
+    }
+    if (this.onlyAvailable) {
+      return this.stations.filter(station => station.status === 'OPEN' && station.available_bikes > 0);
+    }
+    return this.stations;
+  }
+
   formatDate(time: any) {
     return new Date(time).toString().slice(0, 24);
   }
 
+  clearFilter() {
+    this.nameFilter = '';
+    this.onlyAvailable = false;
+  }
+
+  getAvailable() {
+    this.nameFilter = '';
+    this.onlyAvailable = !this.onlyAvailable;
+  }
 }

@@ -1,6 +1,28 @@
 <div class="container-fluid p-5">
-    <h1>Dublin bike stations</h1>
-    <h3>Total number of stations <span class="badge badge-info">{{ stations.length }}</span></h3>
+    <div class="d-flex justify-content-between align-items-center">  
+      <h1>Dublin bike stations</h1>
+      <button class="btn btn-dark" type="button" (click)="refresh()">Refresh data</button>
+    </div>
+    <h3>Total number of 
+      <span class="badge badge-info">stations {{ stations.length }}</span>
+      <span class="badge badge-warning ml-2">available bikes {{ availableBikes }}</span>
+    </h3>
+    <div class="d-flex flex-row mb-3">
+      <div class="input-group">
+        <input [value]="nameFilter" (input)="nameFilter = $event.target.value.toUpperCase()"
+               type="text" class="form-control" placeholder="Station name" aria-label="stationname" aria-describedby="basic-addon1">
+      </div>
+      <div class="form-check btn btn-info mx-2">
+        <input id="availableCheckbox" type="checkbox" (change)="getAvailable()" 
+               [checked]="onlyAvailable" />
+        <label class="form-check-label ml-2" for="availableCheckbox">
+          Show only available
+        </label>
+      </div>
+      <div>
+        <button class="btn btn-danger" type="button" (click)="clearFilter()">Clear</button>
+      </div>
+    </div>
     <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
@@ -14,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let station of stations">
+          <tr *ngFor="let station of filterStations()">
             <th>{{ station.number}}</th>
             <td>{{ station.name }}</td>
             <td>{{ station.address }}</td>
